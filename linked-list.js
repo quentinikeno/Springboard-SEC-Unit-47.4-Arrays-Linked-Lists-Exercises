@@ -101,11 +101,21 @@ class LinkedList {
 	/** insertAt(idx, val): add node w/val before idx. */
 
 	insertAt(idx, val) {
-		if (idx === 0) this.unshift(val);
-		if (idx === this.length - 1) this.push(val);
+		if (idx === 0) {
+			this.unshift(val);
+		} else if (idx === this.length) {
+			this.push(val);
+		} else {
+			let currentNode = this.head;
+			let newNode = new Node(val);
 
-		for (let i = 1; i < this.length - 2; i++) {
-			currentNode = currentNode.next;
+			for (let i = 1; i <= idx - 1; i++) {
+				currentNode = currentNode.next;
+			}
+			const nextNode = currentNode.next;
+			currentNode.next = newNode;
+			newNode.next = nextNode;
+			this.length++;
 		}
 	}
 
