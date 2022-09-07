@@ -139,7 +139,18 @@ class LinkedList {
 
 	/** average(): return an average of all values in the list */
 
-	average() {}
+	average() {
+		if (this.length === 0) return 0;
+
+		let sum = this.head.val;
+		let currentNode = this.head;
+
+		for (let i = 1; i < this.length; i++) {
+			currentNode = currentNode.next;
+			sum += currentNode.val;
+		}
+		return sum / this.length;
+	}
 }
 
 module.exports = LinkedList;
