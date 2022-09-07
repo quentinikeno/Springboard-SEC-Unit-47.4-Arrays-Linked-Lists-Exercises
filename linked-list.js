@@ -80,7 +80,7 @@ class LinkedList {
 		if (idx === 0) return currentNode.val;
 		if (idx === this.length - 1) return this.tail.val;
 
-		for (let i = 1; i < this.length - 2; i++) {
+		for (let i = 1; i <= idx; i++) {
 			currentNode = currentNode.next;
 		}
 		return currentNode.val;
@@ -92,7 +92,7 @@ class LinkedList {
 		let currentNode = this.head;
 
 		if (idx === this.length - 1) currentNode = this.tail;
-		for (let i = 1; i < this.length - 2; i++) {
+		for (let i = 1; i <= idx; i++) {
 			currentNode = currentNode.next;
 		}
 		currentNode.val = val;
@@ -100,7 +100,14 @@ class LinkedList {
 
 	/** insertAt(idx, val): add node w/val before idx. */
 
-	insertAt(idx, val) {}
+	insertAt(idx, val) {
+		if (idx === 0) this.unshift(val);
+		if (idx === this.length - 1) this.push(val);
+
+		for (let i = 1; i < this.length - 2; i++) {
+			currentNode = currentNode.next;
+		}
+	}
 
 	/** removeAt(idx): return & remove item at idx, */
 
