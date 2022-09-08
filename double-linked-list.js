@@ -36,7 +36,10 @@ class LinkedList {
 
 	unshift(val) {
 		const newNode = new Node(val);
-		if (this.head !== null) newNode.next = this.head;
+		if (this.head !== null) {
+			this.head.prev = newNode;
+			newNode.next = this.head;
+		}
 		if (this.tail === null) this.tail = newNode;
 		this.head = newNode;
 		this.length++;
