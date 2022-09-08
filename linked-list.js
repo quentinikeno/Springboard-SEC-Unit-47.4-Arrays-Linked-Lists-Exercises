@@ -18,6 +18,20 @@ class LinkedList {
 		for (let val of vals) this.push(val);
 	}
 
+	/** _get(idx): return node at idx. */
+
+	_get(idx) {
+		let currentNode = this.head;
+
+		if (idx === 0) return currentNode;
+		if (idx === this.length - 1) return this.tail;
+
+		for (let i = 1; i <= idx; i++) {
+			currentNode = currentNode.next;
+		}
+		return currentNode;
+	}
+
 	/** push(val): add new value to end of list. */
 
 	push(val) {
@@ -50,10 +64,8 @@ class LinkedList {
 			this.head = null;
 			this.tail = null;
 		} else {
-			for (let i = 1; i < this.length - 2; i++) {
-				currentNode = currentNode.next;
-			}
-			this.tail = currentNode;
+			const beforeLastNode = this._get(this.length - 2);
+			this.tail = beforeLastNode;
 			this.tail.next = null;
 		}
 
@@ -75,27 +87,14 @@ class LinkedList {
 	/** getAt(idx): get val at idx. */
 
 	getAt(idx) {
-		let currentNode = this.head;
-
-		if (idx === 0) return currentNode.val;
-		if (idx === this.length - 1) return this.tail.val;
-
-		for (let i = 1; i <= idx; i++) {
-			currentNode = currentNode.next;
-		}
-		return currentNode.val;
+		return this._get(idx).val;
 	}
 
 	/** setAt(idx, val): set val at idx to val */
 
 	setAt(idx, val) {
-		let currentNode = this.head;
-
-		if (idx === this.length - 1) currentNode = this.tail;
-		for (let i = 1; i <= idx; i++) {
-			currentNode = currentNode.next;
-		}
-		currentNode.val = val;
+		const node = this._get(idx);
+		node.val = val;
 	}
 
 	/** insertAt(idx, val): add node w/val before idx. */
@@ -106,14 +105,11 @@ class LinkedList {
 		} else if (idx === this.length) {
 			this.push(val);
 		} else {
-			let currentNode = this.head;
-			let newNode = new Node(val);
+			const node = this._get(idx - 1);
+			const newNode = new Node(val);
+			const nextNode = node.next;
 
-			for (let i = 1; i <= idx - 1; i++) {
-				currentNode = currentNode.next;
-			}
-			const nextNode = currentNode.next;
-			currentNode.next = newNode;
+			node.next = newNode;
 			newNode.next = nextNode;
 			this.length++;
 		}
@@ -125,14 +121,11 @@ class LinkedList {
 		if (idx === 0) return this.pop();
 		if (idx === this.length) return this.shift();
 
-		let currentNode = this.head;
+		const node = this._get(idx - 1);
+		const removedNode = node.next;
+		const nextNode = node.next.next;
 
-		for (let i = 1; i <= idx - 1; i++) {
-			currentNode = currentNode.next;
-		}
-		const removedNode = currentNode.next;
-		const nextNode = currentNode.next.next;
-		currentNode.next = nextNode;
+		node.next = nextNode;
 		this.length--;
 		return removedNode.val;
 	}
