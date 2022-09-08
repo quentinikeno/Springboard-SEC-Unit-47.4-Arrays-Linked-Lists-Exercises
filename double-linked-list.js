@@ -132,14 +132,9 @@ class LinkedList {
 		if (idx === 0) return this.pop();
 		if (idx === this.length) return this.shift();
 
-		let currentNode = this.head;
-
-		for (let i = 1; i <= idx - 1; i++) {
-			currentNode = currentNode.next;
-		}
-		const removedNode = currentNode.next;
-		const nextNode = currentNode.next.next;
-		currentNode.next = nextNode;
+		const removedNode = this._get(idx);
+		removedNode.next.prev = removedNode.prev;
+		removedNode.prev.next = removedNode.next;
 		this.length--;
 		return removedNode.val;
 	}
