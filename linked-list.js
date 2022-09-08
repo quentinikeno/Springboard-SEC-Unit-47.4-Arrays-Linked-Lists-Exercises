@@ -58,8 +58,6 @@ class LinkedList {
 		if (this.length === 0) throw new Error("The List is Empty.");
 
 		const oldTail = this.tail;
-		let currentNode = this.head;
-
 		if (this.length === 1) {
 			this.head = null;
 			this.tail = null;
