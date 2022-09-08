@@ -24,7 +24,10 @@ class LinkedList {
 	push(val) {
 		const newNode = new Node(val);
 		if (this.head === null) this.head = newNode;
-		if (this.tail !== null) this.tail.next = newNode;
+		if (this.tail !== null) {
+			this.tail.next = newNode;
+			newNode.prev = this.tail;
+		}
 		this.tail = newNode;
 		this.length++;
 	}
