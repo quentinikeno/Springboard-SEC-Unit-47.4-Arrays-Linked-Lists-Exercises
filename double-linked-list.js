@@ -22,6 +22,10 @@ class LinkedList {
 	/** _get(idx): return node at idx. */
 
 	_get(idx) {
+		if (idx >= this.length || idx < 0) {
+			throw new Error("Invalid index.");
+		}
+
 		let currentNode = this.head;
 
 		if (idx === 0) return currentNode;
