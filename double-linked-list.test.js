@@ -39,12 +39,14 @@ describe("unshift", function () {
 		expect(lst.head.val).toBe(10);
 		expect(lst.head.next.val).toBe(5);
 		expect(lst.tail.val).toBe(5);
+		expect(lst.tail.prev.val).toBe(10);
 
 		lst.unshift(15);
 		expect(lst.length).toBe(3);
 		expect(lst.head.val).toBe(15);
 		expect(lst.head.next.next.val).toBe(5);
 		expect(lst.tail.val).toBe(5);
+		expect(lst.tail.prev.prev.val).toBe(5);
 	});
 });
 
