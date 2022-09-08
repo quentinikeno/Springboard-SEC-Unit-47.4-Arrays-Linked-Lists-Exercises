@@ -115,9 +115,9 @@ describe("insertAt", function () {
 		expect(lst.head.next.next.val).toBe(12);
 		expect(lst.head.next.next.next.val).toBe(15);
 		expect(lst.head.next.next.next.next.val).toBe(20);
-		expect(list.tail.val).toBe(20);
-		expect(list.tail.prev.val).toBe(15);
-		expect(list.tail.prev.prev.val).toBe(12);
+		expect(lst.tail.val).toBe(20);
+		expect(lst.tail.prev.val).toBe(15);
+		expect(lst.tail.prev.prev.val).toBe(12);
 
 		lst.insertAt(5, 25);
 		expect(lst.head.next.next.next.next.next.val).toBe(25);
