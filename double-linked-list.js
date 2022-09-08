@@ -72,9 +72,12 @@ class LinkedList {
 
 	shift() {
 		const oldHead = this.head;
-
-		if (this.length === 1) this.tail = null;
-		this.head = oldHead.next;
+		if (this.length === 1) {
+			(this.tail = null), (this.head = null);
+		} else {
+			this.head = oldHead.next;
+			this.head.prev = null;
+		}
 		this.length--;
 		return oldHead.val;
 	}
