@@ -19,6 +19,20 @@ class LinkedList {
 		for (let val of vals) this.push(val);
 	}
 
+	/** _get(idx): return node at idx. */
+
+	_get(idx) {
+		let currentNode = this.head;
+
+		if (idx === 0) return currentNode;
+		if (idx === this.length - 1) return this.tail;
+
+		for (let i = 1; i <= idx; i++) {
+			currentNode = currentNode.next;
+		}
+		return currentNode;
+	}
+
 	/** push(val): add new value to end of list. */
 
 	push(val) {
@@ -81,27 +95,15 @@ class LinkedList {
 	/** getAt(idx): get val at idx. */
 
 	getAt(idx) {
-		let currentNode = this.head;
-
-		if (idx === 0) return currentNode.val;
-		if (idx === this.length - 1) return this.tail.val;
-
-		for (let i = 1; i <= idx; i++) {
-			currentNode = currentNode.next;
-		}
-		return currentNode.val;
+		const node = this._get(idx);
+		return node.val;
 	}
 
 	/** setAt(idx, val): set val at idx to val */
 
 	setAt(idx, val) {
-		let currentNode = this.head;
-
-		if (idx === this.length - 1) currentNode = this.tail;
-		for (let i = 1; i <= idx; i++) {
-			currentNode = currentNode.next;
-		}
-		currentNode.val = val;
+		const node = this._get(idx);
+		node.val = val;
 	}
 
 	/** insertAt(idx, val): add node w/val before idx. */
@@ -112,15 +114,14 @@ class LinkedList {
 		} else if (idx === this.length) {
 			this.push(val);
 		} else {
-			let currentNode = this.head;
-			let newNode = new Node(val);
+			const node = this._get(idx - 1);
+			const newNode = new Node(val);
+			const nextNode = node.next;
 
-			for (let i = 1; i <= idx - 1; i++) {
-				currentNode = currentNode.next;
-			}
-			const nextNode = currentNode.next;
-			currentNode.next = newNode;
+			node.next = newNode;
 			newNode.next = nextNode;
+			newNode.prev = node;
+			nextNode.prev = newNode;
 			this.length++;
 		}
 	}
