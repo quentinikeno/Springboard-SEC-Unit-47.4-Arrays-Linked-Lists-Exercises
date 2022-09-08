@@ -73,7 +73,7 @@ describe("shift", function () {
 
 		expect(lst.shift()).toBe(5);
 		expect(lst.tail.val).toBe(10);
-		expect(lst.tail.prev).toBe(null);
+		expect(lst.head.prev).toBe(null);
 		expect(lst.length).toBe(1);
 
 		expect(lst.shift()).toBe(10);
