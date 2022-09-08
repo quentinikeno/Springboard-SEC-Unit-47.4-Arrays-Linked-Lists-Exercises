@@ -51,16 +51,12 @@ class LinkedList {
 		if (this.length === 0) throw new Error("The List is Empty.");
 
 		const oldTail = this.tail;
-		let currentNode = this.head;
 
 		if (this.length === 1) {
 			this.head = null;
 			this.tail = null;
 		} else {
-			for (let i = 1; i < this.length - 2; i++) {
-				currentNode = currentNode.next;
-			}
-			this.tail = currentNode;
+			this.tail = this.tail.prev;
 			this.tail.next = null;
 		}
 
